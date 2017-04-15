@@ -1,5 +1,7 @@
 package tw.game.bowling.model;
 
+import tw.game.bowling.exception.BowlingScoreException;
+
 public class BowlingFrame {
     public static final int FULL_SCORE = 10;
     public static final int ZERO_SCORE = 0;
@@ -18,14 +20,19 @@ public class BowlingFrame {
     }
 
     public static BowlingFrame newBowlingNormalFrame(int firstStrikeScore, int secondStrikeScore) {
+        validateInputScores(firstStrikeScore, secondStrikeScore);
+        validateInputScores(firstStrikeScore + secondStrikeScore, 1);
         return new BowlingFrame(FrameType.NORMAL, firstStrikeScore, secondStrikeScore);
     }
 
     public static BowlingFrame newBowlingSpareFrame(int firstStrikeScore) {
+        validateInputScores(firstStrikeScore, 1);
         return new BowlingFrame(FrameType.SPARE, firstStrikeScore, FULL_SCORE - firstStrikeScore);
     }
 
     public static BowlingFrame newBowlingRewardFrame(int firstStrikeScore, int secondStrikeScore) {
+        validateInputScores(firstStrikeScore, 0);
+        validateInputScores(0, secondStrikeScore);
         return new BowlingFrame(FrameType.REWARD, firstStrikeScore, secondStrikeScore);
     }
 
@@ -43,5 +50,11 @@ public class BowlingFrame {
 
     public int getSecondStrikeScore() {
         return secondStrikeScore;
+    }
+
+    private static void validateInputScores(int firstStrikeScore, int secondStrikeScore) {
+        if (firstStrikeScore < ZERO_SCORE || secondStrikeScore < ZERO_SCORE || firstStrikeScore + secondStrikeScore > FULL_SCORE) {
+            throw new BowlingScoreException();
+        }
     }
 }
