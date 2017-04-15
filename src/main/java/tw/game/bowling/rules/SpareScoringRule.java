@@ -10,7 +10,7 @@ import tw.game.bowling.model.FrameType;
 public class SpareScoringRule extends ScoringRule {
 
     @Override
-    protected boolean isFrameTypeMatching(FrameType frameType) {
+    public boolean matchFrameType(FrameType frameType) {
         return SPARE.equals(frameType);
     }
 

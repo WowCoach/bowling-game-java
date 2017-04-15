@@ -14,7 +14,7 @@ public abstract class ScoringRule {
         assertFrameIndex(frameIndex, bowlingFrames.size());
 
         BowlingFrame bowlingFrame = bowlingFrames.get(frameIndex);
-        if (!isFrameTypeMatching(bowlingFrame.getFrameType())) {
+        if (!matchFrameType(bowlingFrame.getFrameType())) {
             throw new TypeMismatchException();
         }
 
@@ -33,7 +33,7 @@ public abstract class ScoringRule {
         }
     }
 
-    protected abstract boolean isFrameTypeMatching(FrameType frameType);
+    public abstract boolean matchFrameType(FrameType frameType);
 
     protected abstract int calculateNextFrameScore(int nextFrameIndex, List<BowlingFrame> bowlingFrames);
 }

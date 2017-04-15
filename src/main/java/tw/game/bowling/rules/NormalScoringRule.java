@@ -9,9 +9,8 @@ import tw.game.bowling.model.FrameType;
 
 public class NormalScoringRule extends ScoringRule {
 
-
     @Override
-    protected boolean isFrameTypeMatching(FrameType frameType) {
+    public boolean matchFrameType(FrameType frameType) {
         return NORMAL.equals(frameType);
     }
 
