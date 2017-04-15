@@ -1,15 +1,15 @@
-package tw.game.bowling;
+package tw.game.bowling.model;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static tw.game.bowling.BowlingFrame.newBowlingNormalFrame;
-import static tw.game.bowling.BowlingFrame.newBowlingRewardFrame;
-import static tw.game.bowling.BowlingFrame.newBowlingSpareFrame;
-import static tw.game.bowling.BowlingFrame.newBowlingStrikeFrame;
-import static tw.game.bowling.FrameType.NORMAL;
-import static tw.game.bowling.FrameType.REWARD;
-import static tw.game.bowling.FrameType.SPARE;
-import static tw.game.bowling.FrameType.STRIKE;
+import static tw.game.bowling.model.BowlingFrame.newBowlingNormalFrame;
+import static tw.game.bowling.model.BowlingFrame.newBowlingRewardFrame;
+import static tw.game.bowling.model.BowlingFrame.newBowlingSpareFrame;
+import static tw.game.bowling.model.BowlingFrame.newBowlingStrikeFrame;
+import static tw.game.bowling.model.FrameType.NORMAL;
+import static tw.game.bowling.model.FrameType.REWARD;
+import static tw.game.bowling.model.FrameType.SPARE;
+import static tw.game.bowling.model.FrameType.STRIKE;
 
 import org.junit.Test;
 

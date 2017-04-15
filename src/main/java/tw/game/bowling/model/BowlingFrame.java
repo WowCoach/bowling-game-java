@@ -1,9 +1,4 @@
-package tw.game.bowling;
-
-import static tw.game.bowling.FrameType.NORMAL;
-import static tw.game.bowling.FrameType.REWARD;
-import static tw.game.bowling.FrameType.SPARE;
-import static tw.game.bowling.FrameType.STRIKE;
+package tw.game.bowling.model;
 
 public class BowlingFrame {
     public static final int FULL_SCORE = 10;
@@ -19,19 +14,19 @@ public class BowlingFrame {
     }
 
     public static BowlingFrame newBowlingStrikeFrame() {
-        return new BowlingFrame(STRIKE, FULL_SCORE, ZERO_SCORE);
+        return new BowlingFrame(FrameType.STRIKE, FULL_SCORE, ZERO_SCORE);
     }
 
     public static BowlingFrame newBowlingNormalFrame(int firstStrikeScore, int secondStrikeScore) {
-        return new BowlingFrame(NORMAL, firstStrikeScore, secondStrikeScore);
+        return new BowlingFrame(FrameType.NORMAL, firstStrikeScore, secondStrikeScore);
     }
 
     public static BowlingFrame newBowlingSpareFrame(int firstStrikeScore) {
-        return new BowlingFrame(SPARE, firstStrikeScore, FULL_SCORE - firstStrikeScore);
+        return new BowlingFrame(FrameType.SPARE, firstStrikeScore, FULL_SCORE - firstStrikeScore);
     }
 
     public static BowlingFrame newBowlingRewardFrame(int firstStrikeScore, int secondStrikeScore) {
-        return new BowlingFrame(REWARD, firstStrikeScore, secondStrikeScore);
+        return new BowlingFrame(FrameType.REWARD, firstStrikeScore, secondStrikeScore);
     }
 
     public int getTotalScore() {

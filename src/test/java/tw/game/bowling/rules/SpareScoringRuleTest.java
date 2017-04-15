@@ -1,14 +1,18 @@
-package tw.game.bowling;
+package tw.game.bowling.rules;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static tw.game.bowling.BowlingFrame.newBowlingNormalFrame;
-import static tw.game.bowling.BowlingFrame.newBowlingRewardFrame;
-import static tw.game.bowling.BowlingFrame.newBowlingSpareFrame;
+import static tw.game.bowling.model.BowlingFrame.newBowlingNormalFrame;
+import static tw.game.bowling.model.BowlingFrame.newBowlingRewardFrame;
+import static tw.game.bowling.model.BowlingFrame.newBowlingSpareFrame;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import tw.game.bowling.exception.TypeMismatchException;
+import tw.game.bowling.exception.InvalidPositionException;
+import tw.game.bowling.exception.LackOfFramesException;
 
 public class SpareScoringRuleTest {
 
@@ -33,7 +37,7 @@ public class SpareScoringRuleTest {
         assertThat(score, is(18));
     }
 
-    @Test(expected = FrameTypeMismatchException.class)
+    @Test(expected = TypeMismatchException.class)
     public void shouldThrowFrameTypeMismatchExceptionWhenCurrentFrameTypeIsNotSpare() throws Exception {
         scoringRule.calculate(1, asList(newBowlingNormalFrame(3, 5)));
     }

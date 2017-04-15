@@ -1,4 +1,4 @@
-package tw.game.bowling;
+package tw.game.bowling.exception;
 
 public class LackOfFramesException extends RuntimeException {
 }

@@ -1,6 +1,11 @@
-package tw.game.bowling;
+package tw.game.bowling.rules;
 
 import java.util.List;
+
+import tw.game.bowling.exception.InvalidPositionException;
+import tw.game.bowling.exception.LackOfFramesException;
+import tw.game.bowling.model.BowlingFrame;
+import tw.game.bowling.model.FrameType;
 
 public abstract class ScoringRule {
     public int calculate(int framePosition, List<BowlingFrame> bowlingFrames) {
@@ -14,7 +19,7 @@ public abstract class ScoringRule {
     }
 
     private void assertFrameIndex(int frameIndex, int frameSize) {
-        if(frameIndex >= frameSize){
+        if (frameIndex >= frameSize) {
             throw new InvalidPositionException();
         }
     }
