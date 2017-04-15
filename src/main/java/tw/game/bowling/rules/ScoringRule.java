@@ -4,6 +4,7 @@ import java.util.List;
 
 import tw.game.bowling.exception.InvalidPositionException;
 import tw.game.bowling.exception.LackOfFramesException;
+import tw.game.bowling.exception.TypeMismatchException;
 import tw.game.bowling.model.BowlingFrame;
 import tw.game.bowling.model.FrameType;
 
@@ -13,7 +14,9 @@ public abstract class ScoringRule {
         assertFrameIndex(frameIndex, bowlingFrames.size());
 
         BowlingFrame bowlingFrame = bowlingFrames.get(frameIndex);
-        checkFrameTypeMatched(bowlingFrame.getFrameType());
+        if (!isFrameTypeMatching(bowlingFrame.getFrameType())) {
+            throw new TypeMismatchException();
+        }
 
         return bowlingFrame.getTotalScore() + calculateNextFrameScore(frameIndex + 1, bowlingFrames);
     }
@@ -30,7 +33,7 @@ public abstract class ScoringRule {
         }
     }
 
-    protected abstract void checkFrameTypeMatched(FrameType frameType);
+    protected abstract boolean isFrameTypeMatching(FrameType frameType);
 
     protected abstract int calculateNextFrameScore(int nextFrameIndex, List<BowlingFrame> bowlingFrames);
 }

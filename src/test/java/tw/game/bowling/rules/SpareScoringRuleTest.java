@@ -10,9 +10,9 @@ import static tw.game.bowling.model.BowlingFrame.newBowlingSpareFrame;
 import org.junit.Before;
 import org.junit.Test;
 
-import tw.game.bowling.exception.TypeMismatchException;
 import tw.game.bowling.exception.InvalidPositionException;
 import tw.game.bowling.exception.LackOfFramesException;
+import tw.game.bowling.exception.TypeMismatchException;
 
 public class SpareScoringRuleTest {
 
