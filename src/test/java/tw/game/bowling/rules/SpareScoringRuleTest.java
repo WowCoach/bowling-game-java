@@ -2,10 +2,14 @@ package tw.game.bowling.rules;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static tw.game.bowling.model.BowlingFrame.newBowlingNormalFrame;
 import static tw.game.bowling.model.BowlingFrame.newBowlingRewardFrame;
 import static tw.game.bowling.model.BowlingFrame.newBowlingSpareFrame;
+import static tw.game.bowling.model.FrameType.NORMAL;
+import static tw.game.bowling.model.FrameType.SPARE;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +39,16 @@ public class SpareScoringRuleTest {
         int score = scoringRule.calculate(1, asList(newBowlingSpareFrame(6), newBowlingRewardFrame(8, 1)));
 
         assertThat(score, is(18));
+    }
+
+    @Test
+    public void shouldMatchFrameTypeReturnTrueGiveParameterTypeIsSpare() throws Exception {
+        assertTrue(scoringRule.matchFrameType(SPARE));
+    }
+
+    @Test
+    public void shouldMatchFrameTypeReturnFalseGiveParameterTypeIsNotSpare() throws Exception {
+        assertFalse(scoringRule.matchFrameType(NORMAL));
     }
 
     @Test(expected = TypeMismatchException.class)

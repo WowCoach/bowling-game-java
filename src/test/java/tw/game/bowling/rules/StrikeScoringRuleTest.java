@@ -2,11 +2,15 @@ package tw.game.bowling.rules;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static tw.game.bowling.model.BowlingFrame.newBowlingNormalFrame;
 import static tw.game.bowling.model.BowlingFrame.newBowlingRewardFrame;
 import static tw.game.bowling.model.BowlingFrame.newBowlingSpareFrame;
 import static tw.game.bowling.model.BowlingFrame.newBowlingStrikeFrame;
+import static tw.game.bowling.model.FrameType.REWARD;
+import static tw.game.bowling.model.FrameType.STRIKE;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +46,16 @@ public class StrikeScoringRuleTest {
         int score = scoringRule.calculate(1, asList(newBowlingStrikeFrame(), newBowlingStrikeFrame(), newBowlingStrikeFrame()));
 
         assertThat(score, is(30));
+    }
+
+    @Test
+    public void shouldMatchFrameTypeReturnTrueGiveParameterTypeIsStrike() throws Exception {
+        assertTrue(scoringRule.matchFrameType(STRIKE));
+    }
+
+    @Test
+    public void shouldMatchFrameTypeReturnFalseGiveParameterTypeIsNotStrike() throws Exception {
+        assertFalse(scoringRule.matchFrameType(REWARD));
     }
 
     @Test(expected = TypeMismatchException.class)
