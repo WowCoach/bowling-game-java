@@ -46,10 +46,10 @@ public class BowlingParser {
     private static List<BowlingFrame> getNormalBowlingFrames(String normalFrame) {
         String[] frames = normalFrame.split(FRAME_SEPARATOR);
         return stream(frames).filter(value -> !value.isEmpty()).map(value -> {
-            if (STRIKE.getCode().equals(value)) {
+            if (STRIKE.isMatch(value)) {
                 return newBowlingStrikeFrame();
             }
-            if (SPARE.getCode().equals(value.substring(1))) {
+            if (SPARE.isMatch(value.substring(1))) {
                 return newBowlingSpareFrame(parseToScore(value.substring(0, 1)));
             }
             if (value.length() == 2) {
@@ -60,10 +60,10 @@ public class BowlingParser {
     }
 
     private static int parseToScore(String value) {
-        if (STRIKE.getCode().equals(value)) {
+        if (STRIKE.isMatch(value)) {
             return FULL_SCORE;
         }
-        if (MISS.getCode().equals(value)) {
+        if (MISS.isMatch(value)) {
             return ZERO_SCORE;
         }
         try {

@@ -13,4 +13,7 @@ public enum FrameType {
         return code;
     }
 
+    public boolean isMatch(String code) {
+        return this.code.equals(code);
+    }
 }
