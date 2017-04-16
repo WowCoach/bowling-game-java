@@ -24,24 +24,39 @@ public class BowlingParser {
     public static List<BowlingFrame> parse(String input) {
         String[] result = input.split(REWARD_SEPARATOR);
 
-        String[] frames = result[0].split(FRAME_SEPARATOR);
-        List<BowlingFrame> bowlingFrames = stream(frames).filter(value -> !value.isEmpty()).map(value -> {
+        List<BowlingFrame> bowlingFrames = getNormalBowlingFrames(result[0]);
+
+        if (hasRewardStrike(result)) {
+            bowlingFrames.add(getRewardBowlingFrame(result[1]));
+        }
+
+        return bowlingFrames;
+    }
+
+    private static boolean hasRewardStrike(String[] result) {
+        return result.length > 1 && !result[1].isEmpty();
+    }
+
+    private static BowlingFrame getRewardBowlingFrame(String reward) {
+        int firstScore = parseToScore(reward.substring(0, 1));
+        int secondScore = reward.length() > 1 ? parseToScore(reward.substring(1)) : 0;
+        return newBowlingRewardFrame(firstScore, secondScore);
+    }
+
+    private static List<BowlingFrame> getNormalBowlingFrames(String normalFrame) {
+        String[] frames = normalFrame.split(FRAME_SEPARATOR);
+        return stream(frames).filter(value -> !value.isEmpty()).map(value -> {
             if (STRIKE.getCode().equals(value)) {
                 return newBowlingStrikeFrame();
             }
             if (SPARE.getCode().equals(value.substring(1))) {
                 return newBowlingSpareFrame(parseToScore(value.substring(0, 1)));
             }
-            return newBowlingMissFrame(parseToScore(value.substring(0, 1)), parseToScore(value.substring(1)));
+            if (value.length() == 2) {
+                return newBowlingMissFrame(parseToScore(value.substring(0, 1)), parseToScore(value.substring(1)));
+            }
+            throw new InvalidFrameDataException();
         }).collect(toList());
-
-        if (result.length > 1 && !result[1].isEmpty()) {
-            String reward = result[1];
-            int firstScore = parseToScore(reward.substring(0, 1));
-            int secondScore = reward.length() > 1 ? parseToScore(reward.substring(1)) : 0;
-            bowlingFrames.add(newBowlingRewardFrame(firstScore, secondScore));
-        }
-        return bowlingFrames;
     }
 
     private static int parseToScore(String value) {

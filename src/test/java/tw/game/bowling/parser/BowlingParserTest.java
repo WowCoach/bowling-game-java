@@ -3,6 +3,7 @@ package tw.game.bowling.parser;
 import static java.util.stream.IntStream.range;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static tw.game.bowling.model.FrameType.MISS;
 import static tw.game.bowling.model.FrameType.REWARD;
 import static tw.game.bowling.model.FrameType.SPARE;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import tw.game.bowling.exception.InvalidFrameDataException;
 import tw.game.bowling.model.BowlingFrame;
 import tw.game.bowling.model.FrameType;
 
@@ -71,6 +73,20 @@ public class BowlingParserTest {
         assertBowlingFrame(bowlingFrames.get(3), MISS, 0, 8);
         assertBowlingFrame(bowlingFrames.get(4), STRIKE, FULL_SCORE, 0);
         assertBowlingFrame(bowlingFrames.get(5), REWARD, 8, 1);
+    }
+
+    @Test(expected = InvalidFrameDataException.class)
+    public void shouldThrowOutInvalidFrameDataExceptionGivenInvalidBowlingString() throws Exception {
+        String input = "5|/|333||";
+
+        BowlingParser.parse(input);
+    }
+
+    @Test
+    public void shouldReturnEmptyBowlingFramesGivenEmptyBowlingString() throws Exception {
+        List<BowlingFrame> bowlingFrames = BowlingParser.parse("");
+
+        assertTrue(bowlingFrames.isEmpty());
     }
 
     private void assertBowlingFrame(BowlingFrame bowlingFrame, FrameType frameType, int firstScore, int secondScore) {
