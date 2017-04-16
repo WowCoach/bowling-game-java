@@ -18,8 +18,8 @@ import tw.game.bowling.exception.InvalidFrameDataException;
 import tw.game.bowling.model.BowlingFrame;
 
 public class BowlingParser {
-    public static final String FRAME_SEPARATOR = "\\|";
-    public static final String REWARD_SEPARATOR = "\\|\\|";
+    private static final String FRAME_SEPARATOR = "\\|";
+    private static final String REWARD_SEPARATOR = "\\|\\|";
 
     public static List<BowlingFrame> parseToBowlingFrames(String input) {
         String[] result = input.split(REWARD_SEPARATOR);

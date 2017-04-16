@@ -9,10 +9,6 @@ public enum FrameType {
         this.code = code;
     }
 
-    public String getCode() {
-        return code;
-    }
-
     public boolean isMatch(String code) {
         return this.code.equals(code);
     }
