@@ -30,7 +30,7 @@ public class BowlingFrameTest {
     }
 
     @Test
-    public void shouldNewNormalBowlingFrame() throws Exception {
+    public void shouldNewMissBowlingFrame() throws Exception {
         BowlingFrame bowlingFrame = newBowlingMissFrame(8, 1);
 
         assertThat(bowlingFrame.getFrameType(), is(MISS));
@@ -80,22 +80,22 @@ public class BowlingFrameTest {
     }
 
     @Test(expected = BowlingScoreException.class)
-    public void shouldNewNormalFrameThrowExceptionWhenTotalScoreIsEqualToFullScore() throws Exception {
+    public void shouldNewMissFrameThrowExceptionWhenTotalScoreIsEqualToFullScore() throws Exception {
         newBowlingMissFrame(5, 5);
     }
 
     @Test(expected = BowlingScoreException.class)
-    public void shouldNewNormalFrameThrowExceptionWhenTotalScoreIsGreaterThanFullScore() throws Exception {
+    public void shouldNewMissFrameThrowExceptionWhenTotalScoreIsGreaterThanFullScore() throws Exception {
         newBowlingMissFrame(5, 6);
     }
 
     @Test(expected = BowlingScoreException.class)
-    public void shouldNewNormalFrameThrowExceptionWhenFirstScoreLessThanZero() throws Exception {
+    public void shouldNewMissFrameThrowExceptionWhenFirstScoreLessThanZero() throws Exception {
         newBowlingMissFrame(-1, 5);
     }
 
     @Test(expected = BowlingScoreException.class)
-    public void shouldNewNormalFrameThrowExceptionWhenSecondScoreLessThanZero() throws Exception {
+    public void shouldNewMissFrameThrowExceptionWhenSecondScoreLessThanZero() throws Exception {
         newBowlingMissFrame(5, -1);
     }
 

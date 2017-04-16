@@ -32,10 +32,7 @@ public class BowlingParser {
             if (SPARE.getCode().equals(value.substring(1))) {
                 return newBowlingSpareFrame(parseToScore(value.substring(0, 1)));
             }
-            if (MISS.getCode().equals(value.substring(1))) {
-                return newBowlingMissFrame(parseToScore(value.substring(0, 1)), parseToScore(value.substring(1)));
-            }
-            return null;
+            return newBowlingMissFrame(parseToScore(value.substring(0, 1)), parseToScore(value.substring(1)));
         }).collect(toList());
 
         if (result.length > 1 && !result[1].isEmpty()) {

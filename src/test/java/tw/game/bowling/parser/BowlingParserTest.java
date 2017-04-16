@@ -47,7 +47,7 @@ public class BowlingParserTest {
     }
 
     @Test
-    public void shouldParseToNormalFrameGivenBowlingNormalStringWithMissCode() throws Exception {
+    public void shouldParseToMissFrameGivenBowlingStringWithMissCode() throws Exception {
         String input = "9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||";
 
         List<BowlingFrame> bowlingFrames = BowlingParser.parse(input);
@@ -56,6 +56,21 @@ public class BowlingParserTest {
         range(0, bowlingFrames.size() - 1).forEach(index ->
                 assertBowlingFrame(bowlingFrames.get(index), MISS, 9, 0)
         );
+    }
+
+    @Test
+    public void shouldParseToBowlingFramesGivenBowingStringWithMixedCode() throws Exception {
+        String input = "53|7/|9-|-8|X||81";
+
+        List<BowlingFrame> bowlingFrames = BowlingParser.parse(input);
+
+        assertThat(bowlingFrames.size(), is(6));
+        assertBowlingFrame(bowlingFrames.get(0), MISS, 5, 3);
+        assertBowlingFrame(bowlingFrames.get(1), SPARE, 7, 3);
+        assertBowlingFrame(bowlingFrames.get(2), MISS, 9, 0);
+        assertBowlingFrame(bowlingFrames.get(3), MISS, 0, 8);
+        assertBowlingFrame(bowlingFrames.get(4), STRIKE, FULL_SCORE, 0);
+        assertBowlingFrame(bowlingFrames.get(5), REWARD, 8, 1);
     }
 
     private void assertBowlingFrame(BowlingFrame bowlingFrame, FrameType frameType, int firstScore, int secondScore) {
