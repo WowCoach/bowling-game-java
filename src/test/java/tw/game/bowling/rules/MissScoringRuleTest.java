@@ -16,28 +16,28 @@ import org.junit.Test;
 import tw.game.bowling.exception.InvalidPositionException;
 import tw.game.bowling.exception.TypeMismatchException;
 
-public class NormalScoringRuleTest {
+public class MissScoringRuleTest {
     private ScoringRule scoringRule;
 
     @Before
     public void setUp() throws Exception {
-        scoringRule = new NormalScoringRule();
+        scoringRule = new MissScoringRule();
     }
 
     @Test
-    public void shouldCalculateScoreWhenCurrentFrameTypeIsNormal() throws Exception {
+    public void shouldCalculateScoreWhenCurrentFrameTypeIsMiss() throws Exception {
         int score = scoringRule.calculate(1, asList(newBowlingMissFrame(3, 5)));
 
         assertThat(score, is(8));
     }
 
     @Test
-    public void shouldMatchFrameTypeReturnTrueGiveParameterTypeIsNormal() throws Exception {
+    public void shouldMatchFrameTypeReturnTrueGiveParameterTypeIsMiss() throws Exception {
         assertTrue(scoringRule.matchFrameType(MISS));
     }
 
     @Test
-    public void shouldMatchFrameTypeReturnFalseGiveParameterTypeIsNotNormal() throws Exception {
+    public void shouldMatchFrameTypeReturnFalseGiveParameterTypeIsNotMiss() throws Exception {
         assertFalse(scoringRule.matchFrameType(SPARE));
     }
 
@@ -47,7 +47,7 @@ public class NormalScoringRuleTest {
     }
 
     @Test(expected = TypeMismatchException.class)
-    public void shouldThrowTypeMismatchExceptionGivenCurrentFrameTypeIsNotNormal() throws Exception {
+    public void shouldThrowTypeMismatchExceptionGivenCurrentFrameTypeIsNotMiss() throws Exception {
         scoringRule.calculate(1, asList(newBowlingStrikeFrame()));
     }
 }

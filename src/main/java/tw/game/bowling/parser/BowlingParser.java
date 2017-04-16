@@ -21,7 +21,7 @@ public class BowlingParser {
     public static final String FRAME_SEPARATOR = "\\|";
     public static final String REWARD_SEPARATOR = "\\|\\|";
 
-    public static List<BowlingFrame> parse(String input) {
+    public static List<BowlingFrame> parseToBowlingFrames(String input) {
         String[] result = input.split(REWARD_SEPARATOR);
 
         List<BowlingFrame> bowlingFrames = getNormalBowlingFrames(result[0]);

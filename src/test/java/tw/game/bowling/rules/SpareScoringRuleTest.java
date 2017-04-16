@@ -28,7 +28,7 @@ public class SpareScoringRuleTest {
     }
 
     @Test
-    public void shouldCalculateScoreWhenCurrentFrameTypeIsSpareAndNextTypeIsNormal() throws Exception {
+    public void shouldCalculateScoreWhenCurrentFrameTypeIsSpareAndNextTypeIsMiss() throws Exception {
         int score = scoringRule.calculate(1, asList(newBowlingSpareFrame(6), newBowlingMissFrame(1, 3)));
 
         assertThat(score, is(11));

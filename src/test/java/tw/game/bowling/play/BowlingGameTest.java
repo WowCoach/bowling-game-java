@@ -29,7 +29,7 @@ import tw.game.bowling.rules.ScoringRule;
 public class BowlingGameTest {
     private BowlingGame bowlingGame;
     @Mock
-    private ScoringRule normalScoringRule;
+    private ScoringRule missScoringRule;
     @Mock
     private ScoringRule spareScoringRule;
     @Mock
@@ -37,10 +37,10 @@ public class BowlingGameTest {
 
     @Before
     public void setUp() throws Exception {
-        when(normalScoringRule.matchFrameType(MISS)).thenReturn(true);
+        when(missScoringRule.matchFrameType(MISS)).thenReturn(true);
         when(spareScoringRule.matchFrameType(SPARE)).thenReturn(true);
         when(strikeScoringRule.matchFrameType(STRIKE)).thenReturn(true);
-        bowlingGame = new BowlingGame(asList(normalScoringRule, spareScoringRule, strikeScoringRule));
+        bowlingGame = new BowlingGame(asList(missScoringRule, spareScoringRule, strikeScoringRule));
     }
 
     @Test
@@ -49,12 +49,12 @@ public class BowlingGameTest {
                 newBowlingMissFrame(3, 5), newBowlingSpareFrame(5),
                 newBowlingStrikeFrame(), newBowlingRewardFrame(10, 10));
 
-        when(normalScoringRule.calculate(1, bowlingFrames)).thenReturn(1);
+        when(missScoringRule.calculate(1, bowlingFrames)).thenReturn(1);
         when(spareScoringRule.calculate(2, bowlingFrames)).thenReturn(2);
         when(strikeScoringRule.calculate(3, bowlingFrames)).thenReturn(3);
 
         int score = bowlingGame.calculate(bowlingFrames);
-        verify(normalScoringRule).calculate(1, bowlingFrames);
+        verify(missScoringRule).calculate(1, bowlingFrames);
         verify(spareScoringRule).calculate(2, bowlingFrames);
         verify(strikeScoringRule).calculate(3, bowlingFrames);
 

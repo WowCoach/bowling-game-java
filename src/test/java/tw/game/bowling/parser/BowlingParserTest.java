@@ -8,6 +8,7 @@ import static tw.game.bowling.model.FrameType.MISS;
 import static tw.game.bowling.model.FrameType.REWARD;
 import static tw.game.bowling.model.FrameType.SPARE;
 import static tw.game.bowling.model.FrameType.STRIKE;
+import static tw.game.bowling.parser.BowlingParser.parseToBowlingFrames;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class BowlingParserTest {
     public void shouldParseToBowlingFramesGivenBowlingStrikeString() throws Exception {
         String input = "X|X|X|X|X|X|X|X|X|X||XX";
 
-        List<BowlingFrame> bowlingFrames = BowlingParser.parse(input);
+        List<BowlingFrame> bowlingFrames = parseToBowlingFrames(input);
 
         assertThat(bowlingFrames.size(), is(11));
         range(0, bowlingFrames.size() - 1).forEach(index ->
@@ -39,7 +40,7 @@ public class BowlingParserTest {
     public void shouldParseToBowlingFrameGivenBowlingSpareString() throws Exception {
         String input = "5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5";
 
-        List<BowlingFrame> bowlingFrames = BowlingParser.parse(input);
+        List<BowlingFrame> bowlingFrames = parseToBowlingFrames(input);
 
         assertThat(bowlingFrames.size(), is(11));
         range(0, bowlingFrames.size() - 1).forEach(index ->
@@ -52,7 +53,7 @@ public class BowlingParserTest {
     public void shouldParseToMissFrameGivenBowlingStringWithMissCode() throws Exception {
         String input = "9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||";
 
-        List<BowlingFrame> bowlingFrames = BowlingParser.parse(input);
+        List<BowlingFrame> bowlingFrames = parseToBowlingFrames(input);
 
         assertThat(bowlingFrames.size(), is(10));
         range(0, bowlingFrames.size() - 1).forEach(index ->
@@ -64,7 +65,7 @@ public class BowlingParserTest {
     public void shouldParseToBowlingFramesGivenBowingStringWithMixedCode() throws Exception {
         String input = "53|7/|9-|-8|X||81";
 
-        List<BowlingFrame> bowlingFrames = BowlingParser.parse(input);
+        List<BowlingFrame> bowlingFrames = parseToBowlingFrames(input);
 
         assertThat(bowlingFrames.size(), is(6));
         assertBowlingFrame(bowlingFrames.get(0), MISS, 5, 3);
@@ -79,12 +80,12 @@ public class BowlingParserTest {
     public void shouldThrowOutInvalidFrameDataExceptionGivenInvalidBowlingString() throws Exception {
         String input = "5|/|333||";
 
-        BowlingParser.parse(input);
+        parseToBowlingFrames(input);
     }
 
     @Test
     public void shouldReturnEmptyBowlingFramesGivenEmptyBowlingString() throws Exception {
-        List<BowlingFrame> bowlingFrames = BowlingParser.parse("");
+        List<BowlingFrame> bowlingFrames = parseToBowlingFrames("");
 
         assertTrue(bowlingFrames.isEmpty());
     }

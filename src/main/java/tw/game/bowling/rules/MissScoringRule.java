@@ -7,7 +7,7 @@ import java.util.List;
 import tw.game.bowling.model.BowlingFrame;
 import tw.game.bowling.model.FrameType;
 
-public class NormalScoringRule extends ScoringRule {
+public class MissScoringRule extends ScoringRule {
 
     @Override
     public boolean matchFrameType(FrameType frameType) {

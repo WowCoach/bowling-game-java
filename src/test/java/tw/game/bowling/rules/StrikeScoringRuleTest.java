@@ -28,7 +28,7 @@ public class StrikeScoringRuleTest {
     }
 
     @Test
-    public void shouldCalculateScoreWhenCurrentFrameTypeIsStrikeAndNextIsNormal() throws Exception {
+    public void shouldCalculateScoreWhenCurrentFrameTypeIsStrikeAndNextIsMiss() throws Exception {
         int score = scoringRule.calculate(1, asList(newBowlingStrikeFrame(), newBowlingMissFrame(3, 5)));
 
         assertThat(score, is(18));
