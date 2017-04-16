@@ -5,10 +5,10 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static tw.game.bowling.model.BowlingFrame.newBowlingNormalFrame;
+import static tw.game.bowling.model.BowlingFrame.newBowlingMissFrame;
 import static tw.game.bowling.model.BowlingFrame.newBowlingRewardFrame;
 import static tw.game.bowling.model.BowlingFrame.newBowlingSpareFrame;
-import static tw.game.bowling.model.FrameType.NORMAL;
+import static tw.game.bowling.model.FrameType.MISS;
 import static tw.game.bowling.model.FrameType.SPARE;
 
 import org.junit.Before;
@@ -29,7 +29,7 @@ public class SpareScoringRuleTest {
 
     @Test
     public void shouldCalculateScoreWhenCurrentFrameTypeIsSpareAndNextTypeIsNormal() throws Exception {
-        int score = scoringRule.calculate(1, asList(newBowlingSpareFrame(6), newBowlingNormalFrame(1, 3)));
+        int score = scoringRule.calculate(1, asList(newBowlingSpareFrame(6), newBowlingMissFrame(1, 3)));
 
         assertThat(score, is(11));
     }
@@ -48,12 +48,12 @@ public class SpareScoringRuleTest {
 
     @Test
     public void shouldMatchFrameTypeReturnFalseGiveParameterTypeIsNotSpare() throws Exception {
-        assertFalse(scoringRule.matchFrameType(NORMAL));
+        assertFalse(scoringRule.matchFrameType(MISS));
     }
 
     @Test(expected = TypeMismatchException.class)
     public void shouldThrowFrameTypeMismatchExceptionWhenCurrentFrameTypeIsNotSpare() throws Exception {
-        scoringRule.calculate(1, asList(newBowlingNormalFrame(3, 5)));
+        scoringRule.calculate(1, asList(newBowlingMissFrame(3, 5)));
     }
 
     @Test(expected = InvalidPositionException.class)

@@ -19,10 +19,10 @@ public class BowlingFrame {
         return new BowlingFrame(FrameType.STRIKE, FULL_SCORE, ZERO_SCORE);
     }
 
-    public static BowlingFrame newBowlingNormalFrame(int firstStrikeScore, int secondStrikeScore) {
+    public static BowlingFrame newBowlingMissFrame(int firstStrikeScore, int secondStrikeScore) {
         validateInputScores(firstStrikeScore, secondStrikeScore);
         validateInputScores(firstStrikeScore + secondStrikeScore, 1);
-        return new BowlingFrame(FrameType.NORMAL, firstStrikeScore, secondStrikeScore);
+        return new BowlingFrame(FrameType.MISS, firstStrikeScore, secondStrikeScore);
     }
 
     public static BowlingFrame newBowlingSpareFrame(int firstStrikeScore) {

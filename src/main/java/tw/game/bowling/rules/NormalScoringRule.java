@@ -1,6 +1,6 @@
 package tw.game.bowling.rules;
 
-import static tw.game.bowling.model.FrameType.NORMAL;
+import static tw.game.bowling.model.FrameType.MISS;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public class NormalScoringRule extends ScoringRule {
 
     @Override
     public boolean matchFrameType(FrameType frameType) {
-        return NORMAL.equals(frameType);
+        return MISS.equals(frameType);
     }
 
     @Override

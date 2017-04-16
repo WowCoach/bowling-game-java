@@ -5,11 +5,11 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static tw.game.bowling.model.BowlingFrame.newBowlingNormalFrame;
+import static tw.game.bowling.model.BowlingFrame.newBowlingMissFrame;
 import static tw.game.bowling.model.BowlingFrame.newBowlingRewardFrame;
 import static tw.game.bowling.model.BowlingFrame.newBowlingSpareFrame;
 import static tw.game.bowling.model.BowlingFrame.newBowlingStrikeFrame;
-import static tw.game.bowling.model.FrameType.NORMAL;
+import static tw.game.bowling.model.FrameType.MISS;
 import static tw.game.bowling.model.FrameType.SPARE;
 import static tw.game.bowling.model.FrameType.STRIKE;
 
@@ -37,7 +37,7 @@ public class BowlingGameTest {
 
     @Before
     public void setUp() throws Exception {
-        when(normalScoringRule.matchFrameType(NORMAL)).thenReturn(true);
+        when(normalScoringRule.matchFrameType(MISS)).thenReturn(true);
         when(spareScoringRule.matchFrameType(SPARE)).thenReturn(true);
         when(strikeScoringRule.matchFrameType(STRIKE)).thenReturn(true);
         bowlingGame = new BowlingGame(asList(normalScoringRule, spareScoringRule, strikeScoringRule));
@@ -46,7 +46,7 @@ public class BowlingGameTest {
     @Test
     public void shouldCallDifferentScoringRuleBasedOnTheFrameType() throws Exception {
         List<BowlingFrame> bowlingFrames = asList(
-                newBowlingNormalFrame(3, 5), newBowlingSpareFrame(5),
+                newBowlingMissFrame(3, 5), newBowlingSpareFrame(5),
                 newBowlingStrikeFrame(), newBowlingRewardFrame(10, 10));
 
         when(normalScoringRule.calculate(1, bowlingFrames)).thenReturn(1);
@@ -65,7 +65,7 @@ public class BowlingGameTest {
     public void shouldReturnZeroWhenNoScoringRulesProvided() throws Exception {
         BowlingGame bowlingGame = new BowlingGame(new ArrayList<>());
 
-        int score = bowlingGame.calculate(asList(newBowlingNormalFrame(3, 5)));
+        int score = bowlingGame.calculate(asList(newBowlingMissFrame(3, 5)));
 
         assertThat(score, is(0));
     }

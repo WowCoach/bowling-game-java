@@ -5,7 +5,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static tw.game.bowling.model.BowlingFrame.newBowlingNormalFrame;
+import static tw.game.bowling.model.BowlingFrame.newBowlingMissFrame;
 import static tw.game.bowling.model.BowlingFrame.newBowlingRewardFrame;
 import static tw.game.bowling.model.BowlingFrame.newBowlingSpareFrame;
 import static tw.game.bowling.model.BowlingFrame.newBowlingStrikeFrame;
@@ -29,7 +29,7 @@ public class StrikeScoringRuleTest {
 
     @Test
     public void shouldCalculateScoreWhenCurrentFrameTypeIsStrikeAndNextIsNormal() throws Exception {
-        int score = scoringRule.calculate(1, asList(newBowlingStrikeFrame(), newBowlingNormalFrame(3, 5)));
+        int score = scoringRule.calculate(1, asList(newBowlingStrikeFrame(), newBowlingMissFrame(3, 5)));
 
         assertThat(score, is(18));
     }

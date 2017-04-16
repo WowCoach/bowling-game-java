@@ -2,11 +2,11 @@ package tw.game.bowling.model;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static tw.game.bowling.model.BowlingFrame.newBowlingNormalFrame;
+import static tw.game.bowling.model.BowlingFrame.newBowlingMissFrame;
 import static tw.game.bowling.model.BowlingFrame.newBowlingRewardFrame;
 import static tw.game.bowling.model.BowlingFrame.newBowlingSpareFrame;
 import static tw.game.bowling.model.BowlingFrame.newBowlingStrikeFrame;
-import static tw.game.bowling.model.FrameType.NORMAL;
+import static tw.game.bowling.model.FrameType.MISS;
 import static tw.game.bowling.model.FrameType.REWARD;
 import static tw.game.bowling.model.FrameType.SPARE;
 import static tw.game.bowling.model.FrameType.STRIKE;
@@ -31,9 +31,9 @@ public class BowlingFrameTest {
 
     @Test
     public void shouldNewNormalBowlingFrame() throws Exception {
-        BowlingFrame bowlingFrame = newBowlingNormalFrame(8, 1);
+        BowlingFrame bowlingFrame = newBowlingMissFrame(8, 1);
 
-        assertThat(bowlingFrame.getFrameType(), is(NORMAL));
+        assertThat(bowlingFrame.getFrameType(), is(MISS));
         assertThat(bowlingFrame.getFirstStrikeScore(), is(8));
         assertThat(bowlingFrame.getSecondStrikeScore(), is(1));
         assertThat(bowlingFrame.getTotalScore(), is(9));
@@ -81,22 +81,22 @@ public class BowlingFrameTest {
 
     @Test(expected = BowlingScoreException.class)
     public void shouldNewNormalFrameThrowExceptionWhenTotalScoreIsEqualToFullScore() throws Exception {
-        newBowlingNormalFrame(5, 5);
+        newBowlingMissFrame(5, 5);
     }
 
     @Test(expected = BowlingScoreException.class)
     public void shouldNewNormalFrameThrowExceptionWhenTotalScoreIsGreaterThanFullScore() throws Exception {
-        newBowlingNormalFrame(5, 6);
+        newBowlingMissFrame(5, 6);
     }
 
     @Test(expected = BowlingScoreException.class)
     public void shouldNewNormalFrameThrowExceptionWhenFirstScoreLessThanZero() throws Exception {
-        newBowlingNormalFrame(-1, 5);
+        newBowlingMissFrame(-1, 5);
     }
 
     @Test(expected = BowlingScoreException.class)
     public void shouldNewNormalFrameThrowExceptionWhenSecondScoreLessThanZero() throws Exception {
-        newBowlingNormalFrame(5, -1);
+        newBowlingMissFrame(5, -1);
     }
 
     @Test(expected = BowlingScoreException.class)
